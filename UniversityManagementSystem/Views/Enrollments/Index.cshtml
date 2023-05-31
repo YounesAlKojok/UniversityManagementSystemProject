@@ -14,7 +14,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.EnrolDate)
+                @Html.DisplayNameFor(model => model.Student)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Semester)
@@ -23,11 +26,12 @@
                 @Html.DisplayNameFor(model => model.Year)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Course)
+                @*@Html.DisplayNameFor(model => model.Course.Lecturer.Mail)*@
+                Lecturer Mail
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student)
-            </th>
+@*            <th>
+                @Html.DisplayNameFor(model => model.EnrolDate)
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -35,7 +39,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.EnrolDate)
+                @Html.DisplayFor(modelItem => item.Student.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Semester)
@@ -43,12 +50,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Year)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Course.Name)
+            <td>@*
+                    @Html.DisplayFor(modelItem => item.Course.Lecturer.Mail)*@
+                    <a href="mailto:@(item.Course.Lecturer.Mail)">@item.Course.Lecturer.Mail</a>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student.FullName)
-            </td>
+@*            <td>
+                @Html.DisplayFor(modelItem => item.EnrolDate)
+            </td>*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

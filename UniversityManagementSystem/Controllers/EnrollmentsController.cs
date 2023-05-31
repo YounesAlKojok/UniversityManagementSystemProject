@@ -25,7 +25,7 @@ namespace UniversityManagementSystem.Controllers
         // GET: Enrollments
         public async Task<IActionResult> Index()
         {
-            var universityManagementSysDbContext = _context.Enrollments.Include(e => e.Course).Include(e => e.Student);
+            var universityManagementSysDbContext = _context.Enrollments.Include(e => e.Course).Include(e => e.Student).Include(e => e.Course.Lecturer); ;
             return View(await universityManagementSysDbContext.ToListAsync());
         }
 

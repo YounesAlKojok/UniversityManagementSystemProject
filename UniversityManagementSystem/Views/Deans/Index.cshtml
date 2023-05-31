@@ -56,7 +56,8 @@
                 @Html.DisplayFor(modelItem => item.Address)
             </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.Mail)
+                @*@Html.DisplayFor(modelItem => item.Mail)*@
+                    <a href="mailto:@(item.Mail)">@item.Mail</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Office)
