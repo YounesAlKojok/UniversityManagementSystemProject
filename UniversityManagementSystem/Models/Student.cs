@@ -14,19 +14,21 @@ namespace UniversityManagementSystem.Models
         [Required]
         public DateTime? Dob { get; set; }
 
+        [Display(Name = "First Name")]
         public string Fname { get; set; } = null!;
-
+        [Display(Name = "Last Name")]
         public string Lname { get; set; } = null!;
 
         public int DepartmentId { get; set; }
-
+        [RegularExpression(@"^.+@ums\.com$", ErrorMessage = "The {0} field is not a valid email address.")]
+        [Required]
         public string Mail { get; set; } = null!;
 
         public string? Phone { get; set; }
 
-        public virtual ICollection<Appoinment> Appoinments { get; set; } = new List<Appoinment>();
+        public virtual Department? Department { get; set; } = null!;
 
-        public virtual Department Department { get; set; } = null!;
+        public virtual ICollection<Appoinment> Appoinments { get; set; } = new List<Appoinment>();
 
         public virtual ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
 

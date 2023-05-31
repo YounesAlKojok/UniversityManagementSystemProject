@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -52,7 +53,7 @@ namespace UniversityManagementSystem.Controllers
         [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
-            ViewData["DeanId"] = new SelectList(_context.Deans, "Id", "FullName", "Mail");
+            ViewData["DeanId"] = new SelectList(_context.Deans, "Id", "FullName","Mail");
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Name");
             return View();
         }
@@ -70,7 +71,7 @@ namespace UniversityManagementSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DeanId"] = new SelectList(_context.Deans, "Id", "Mail", department.DeanId);
+            ViewData["DeanId"] = new SelectList(_context.Deans, "Id", "Id", department.DeanId);
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Id", department.FacultyId);
             return View(department);
         }
@@ -126,7 +127,7 @@ namespace UniversityManagementSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DeanId"] = new SelectList(_context.Deans, "Id", "Mail", department.DeanId);
+            ViewData["DeanId"] = new SelectList(_context.Deans, "Id", "Id", department.DeanId);
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Id", department.FacultyId);
             return View(department);
         }

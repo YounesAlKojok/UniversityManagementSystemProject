@@ -54,7 +54,7 @@ namespace UniversityManagementSystem.Controllers
         public IActionResult Create()
         {
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Name");
-            ViewData["LecturerId"] = new SelectList(_context.Lecturers, "Id", "FullName","mail");
+            ViewData["LecturerId"] = new SelectList(_context.Lecturers, "Id", "FullName");
             return View();
         }
 
@@ -71,8 +71,8 @@ namespace UniversityManagementSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Name", course.FacultyId);
-            ViewData["LecturerId"] = new SelectList(_context.Lecturers, "Id", "Mail", course.LecturerId);
+            ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Id", course.FacultyId);
+            ViewData["LecturerId"] = new SelectList(_context.Lecturers, "Id", "Id", course.LecturerId);
             return View(course);
         }
 
@@ -128,7 +128,7 @@ namespace UniversityManagementSystem.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Id", course.FacultyId);
-            ViewData["LecturerId"] = new SelectList(_context.Lecturers, "Id", "Mail", course.LecturerId);
+            ViewData["LecturerId"] = new SelectList(_context.Lecturers, "Id", "Id", course.LecturerId);
             return View(course);
         }
 

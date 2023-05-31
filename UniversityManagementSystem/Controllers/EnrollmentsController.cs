@@ -12,7 +12,7 @@ using UniversityManagementSystem.Models;
 
 namespace UniversityManagementSystem.Controllers
 {
-    [Authorize(Roles]
+    [Authorize]
     public class EnrollmentsController : Controller
     {
         private readonly UniversityManagementSysDbContext _context;

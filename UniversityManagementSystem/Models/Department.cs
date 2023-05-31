@@ -10,9 +10,9 @@
 
         public int FacultyId { get; set; }
 
-        public virtual Dean Dean { get; set; } = null!;
+        public virtual Dean? Dean { get; set; } = null!;
 
-        public virtual Faculty Faculty { get; set; } = null!;
+        public virtual Faculty? Faculty { get; set; } = null!;
 
         public virtual ICollection<Student> Students { get; set; } = new List<Student>();
 
@@ -23,7 +23,7 @@
 
         //public void AddCourse(Course course) { Courses.Add(course); }
         //public void RemoveCourse(Course course) { Courses.Remove(course); }
-        public int GetStudentCount() { return Students.Count; }
-        public int GetCourseCount() { return Courses.Count; }
+        //public int GetStudentCount() { return Students.Count; }
+        //public int GetCourseCount() { return Courses.Count; }
     }
 }

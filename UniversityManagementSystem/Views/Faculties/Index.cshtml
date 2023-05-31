@@ -10,18 +10,18 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-hover ">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
+        <tr class="table-active">
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Dean)
+                @Html.DisplayNameFor(model => model.Location)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dean)
+            </th>*
             <th>Departments</th>
             <th></th>
         </tr>
@@ -30,20 +30,24 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Dean.Mail)
+                @Html.DisplayFor(modelItem => item.Location)
             </td>
             <td>
-                @foreach (var department in item.Departments)
-                    {
-                        @department.Name
-                    }    
+                    <a href="mailto:@(item.Dean.Mail)">@item.Dean.Mail</a>
             </td>
+            <td>
+                    @foreach (var department in item.Departments)
+                    {
+                        @*<p class="m-1">@department.Name</p>*@
+                        <p>
+                            <a asp-action="Details" asp-controller="Departments" asp-route-id="@department.Id">@department.Name</a>
+                        </p>
+                    }
+             </td>
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

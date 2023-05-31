@@ -25,9 +25,9 @@
  @*           <th>
                 Students
             </th>*@
-            <th>
+@*            <th>
                 Courses
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -38,7 +38,8 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Dean.FullName)
+                @*@Html.DisplayFor(modelItem => item.Dean.Mail)*@
+                <a href="mailto:@(item.Dean.Mail)">@item.Dean.Mail</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Faculty.Name)
@@ -46,9 +47,9 @@
 @*            <td>
                     @Html.DisplayFor(modelItem => item.Faculty.GetcourseCount())
             </td>*@
-            <td>
+@*            <td>
                     @Html.DisplayFor(modelItem => item.Faculty.GetcourseCount())
-            </td>
+            </td>*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

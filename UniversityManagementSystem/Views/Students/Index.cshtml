@@ -29,7 +29,8 @@
                 @Html.DisplayNameFor(model => model.Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Dob)
+                @*@Html.DisplayNameFor(model => model.Dob)*@
+                Age
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Department)
@@ -56,10 +57,10 @@
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Dob)
+                @item.CalculateAge()
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Department.Id)
+                @Html.DisplayFor(modelItem => item.Department.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
