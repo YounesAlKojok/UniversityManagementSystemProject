@@ -122,22 +122,15 @@ namespace UniversityManagementSystem.Data
                 entity.HasOne(d => d.Lecturer).WithMany(p => p.Courses).HasForeignKey(d => d.LecturerId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasMany(d => d.Departments).WithMany(p => p.Courses)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "DepartmentsCourse",
-                        r => r.HasOne<Department>().WithMany()
-                            .HasForeignKey("DepartmentId")
-                            .OnDelete(DeleteBehavior.Cascade),
-                        l => l.HasOne<Course>().WithMany()
-                            .HasForeignKey("CourseId")
-                            .OnDelete(DeleteBehavior.Cascade),
-                        j =>
-                        {
-                            j.HasKey("CourseId", "DepartmentId");
-                            j.ToTable("DepartmentsCourses");
-                            j.IndexerProperty<int>("CourseId").HasColumnName("Course_Id");
-                            j.IndexerProperty<int>("DepartmentId").HasColumnName("Department_Id");
-                        });
+                entity.HasMany(d => d.Departments)
+                .WithMany(p => p.Courses)
+                    .UsingEntity<DepartmentsCourses>(j => j.HasOne(d => d.Department).WithMany().HasForeignKey("DepartmentId").OnDelete(DeleteBehavior.Cascade),
+                j => j.HasOne(d => d.Course).WithMany().HasForeignKey("CourseId").OnDelete(DeleteBehavior.Cascade),
+                j =>
+                {
+                    j.HasKey("CourseId", "DepartmentId");
+                    j.ToTable("DepartmentsCourses");
+                });
             });
 
             modelBuilder.Entity<Dean>(entity =>
@@ -266,10 +259,29 @@ namespace UniversityManagementSystem.Data
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
+
+            modelBuilder.Entity<DepartmentsCourses>(entity =>
+            {
+                entity.HasKey(e => e.Id); // Specify primary key
+
+                entity.HasOne(d => d.Department)
+                    .WithMany(p => p.DepartmentsCourses)
+                    .HasForeignKey(d => d.DepartmentId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(d => d.Course)
+                    .WithMany(p => p.DepartmentsCourses)
+                    .HasForeignKey(d => d.CourseId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+
             OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<UniversityManagementSystem.Models.DepartmentsCourses>? DepartmentsCourses { get; set; }
     }
 
 }

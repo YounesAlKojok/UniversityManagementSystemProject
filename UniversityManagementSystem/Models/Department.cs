@@ -17,6 +17,7 @@
         public virtual ICollection<Student> Students { get; set; } = new List<Student>();
 
         public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
+        public virtual ICollection<DepartmentsCourses> DepartmentsCourses { get; set; } = new List<DepartmentsCourses>();
 
 
         //addon methods and new var
