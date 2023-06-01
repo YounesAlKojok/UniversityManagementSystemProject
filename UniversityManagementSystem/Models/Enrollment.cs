@@ -17,6 +17,8 @@ namespace UniversityManagementSystem.Models
         [Range(2024, 2026, ErrorMessage = "Please enter a year between 2024 and 2026.")]
         public int Year { get; set; }
 
+        public Double Grade { get; set; } = 0.0; // New grade field
+
         public virtual Course? Course { get; set; } = null!;
 
         public virtual Student? Student { get; set; } = null!;

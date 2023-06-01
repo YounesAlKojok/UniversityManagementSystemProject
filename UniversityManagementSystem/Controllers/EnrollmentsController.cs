@@ -77,7 +77,7 @@ namespace UniversityManagementSystem.Controllers
         }
 
         // GET: Enrollments/Edit/5
-        [Authorize(Roles = "Student")]
+        //[Authorize(Roles = "Student")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Enrollments == null)
@@ -100,36 +100,61 @@ namespace UniversityManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CourseId,EnrolDate,Semester,StudentId,Year")] Enrollment enrollment)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CourseId,EnrolDate,Semester,StudentId,Year,Grade")] Enrollment enrollment)
         {
             if (id != enrollment.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            // Retrieve the logged-in lecturer's email
+            string lecturerEmail = User.Identity.Name;
+
+            // Find the enrollment and include the course's lecturer
+            var enrollmentToUpdate = await _context.Enrollments
+                .Include(e => e.Course)
+                .ThenInclude(c => c.Lecturer)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (enrollmentToUpdate == null)
             {
-                try
-                {
-                    _context.Update(enrollment);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EnrollmentExists(enrollment.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Id", enrollment.CourseId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", enrollment.StudentId);
-            return View(enrollment);
+
+            // Check if the logged-in lecturer's email matches the course's lecturer email
+            if (enrollmentToUpdate.Course.Lecturer.Mail == lecturerEmail)
+            {
+                // Update the enrollment's grade
+                enrollmentToUpdate.Grade = enrollment.Grade;
+
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(enrollmentToUpdate);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!EnrollmentExists(enrollmentToUpdate.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Name", enrollment.CourseId);
+                ViewData["StudentId"] = new SelectList(_context.Students, "Id", "FullName", enrollment.StudentId);
+                return View(enrollmentToUpdate);
+            }
+
+            // If the logged-in lecturer's email does not match, show an error message
+            ModelState.AddModelError("", "You are not authorized to edit the enrollment grade.");
+            return View(enrollmentToUpdate);
         }
 
         // GET: Enrollments/Delete/5
