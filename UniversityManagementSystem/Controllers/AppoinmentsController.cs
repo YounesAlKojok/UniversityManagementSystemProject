@@ -11,7 +11,7 @@ using UniversityManagementSystem.Models;
 
 namespace UniversityManagementSystem.Controllers
 {
-    [Authorize(Roles ="Student,Dean")]
+    //[Authorize(Roles ="Student,Dean")]
     public class AppoinmentsController : Controller
     {
         private readonly UniversityManagementSysDbContext _context;

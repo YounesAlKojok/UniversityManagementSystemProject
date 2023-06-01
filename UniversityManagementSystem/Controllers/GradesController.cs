@@ -12,7 +12,7 @@ using UniversityManagementSystem.Models;
 
 namespace UniversityManagementSystem.Controllers
 {
-    [Authorize(Roles = "Dean,Lecturer,Student")]
+    [Authorize]
     public class GradesController : Controller
     {
         private readonly UniversityManagementSysDbContext _context;
@@ -50,7 +50,7 @@ namespace UniversityManagementSystem.Controllers
         }
 
         // GET: Grades/Create
-        [Authorize(Roles = "Lecturer")]
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Name");
@@ -77,7 +77,7 @@ namespace UniversityManagementSystem.Controllers
         }
 
         // GET: Grades/Edit/5
-        [Authorize(Roles = "Lecturer")]
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Grades == null)
@@ -133,7 +133,7 @@ namespace UniversityManagementSystem.Controllers
         }
 
         // GET: Grades/Delete/5
-        [Authorize(Roles = "Lecturer")]
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Grades == null)

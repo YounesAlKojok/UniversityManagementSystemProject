@@ -50,7 +50,7 @@ namespace UniversityManagementSystem.Controllers
         }
 
         // GET: Enrollments/Create
-        [Authorize(Roles = "Student")]
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Name");
