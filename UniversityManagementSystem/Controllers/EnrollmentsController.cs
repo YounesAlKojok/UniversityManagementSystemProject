@@ -50,7 +50,7 @@ namespace UniversityManagementSystem.Controllers
         }
 
         // GET: Enrollments/Create
-        [Authorize]
+        [Authorize(Roles = "Administrator,Dean")]
         public IActionResult Create()
         {
             ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Name");
@@ -77,7 +77,7 @@ namespace UniversityManagementSystem.Controllers
         }
 
         // GET: Enrollments/Edit/5
-        //[Authorize(Roles = "Student")]
+        [Authorize(Roles = "Administrator, Lecturer, Dean")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Enrollments == null)

@@ -6,27 +6,24 @@
 }
 
 <h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (User.IsInRole("Administrator") || User.IsInRole("Dean") || User.IsInRole("Student"))
+{
+    <p><a asp-action="Create">Create New</a></p>
+}
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Duration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reason)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Dean)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Student)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IsSlotActive)
@@ -35,65 +32,145 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-@*            <td style="@(item.Date < DateTime.Now ? "color: red;font-weight: bold;" : "")">
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>*@
-                @{
-                    DateTime fifteenMinutesLater = DateTime.Now.AddMinutes(15);
-                    bool isExpired = item.Date < DateTime.Now;
-                    bool isWithinFifteenMinutes = item.Date >= DateTime.Now && item.Date <= fifteenMinutesLater;
-                    string colorStyle = isExpired ? "color: red;" : (isWithinFifteenMinutes ? "color: green;" : "color: gray;");
-                    string fontWeightStyle = isExpired || isWithinFifteenMinutes ? "font-weight: none;" : "";
-                }
-
-                <td style="@colorStyle @fontWeightStyle">
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-
-
-            <td>
-                @Html.DisplayFor(modelItem => item.Duration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reason)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dean.Mail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student.Id)
-            </td>
-@*            <td>
-                @Html.DisplayFor(modelItem => item.IsSlotActive)
-            </td>*@
-
-                <td>
-                    @if (item.Date < DateTime.Now)
-                    {
-                        item.IsSlotActive = false;
-                        <span style="color: red;">Passed</span>
+        @foreach (var item in Model) 
+        {
+            @if (User.IsInRole("Administrator"))
+            {            
+                <tr>
+                    <td>                
+                            <a href="mailto:@(item.Dean.Mail)">@item.Dean.FullName</a>
+                    </td>
+                    <td>
+                           <a href="mailto:@(item.Student.Mail)">@item.Student.FullName</a>
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.Reason)
+                    </td>
+                    @{
+                            DateTime fifteenMinutesLater = DateTime.Now.AddMinutes(15);
+                            bool isExpired = item.Date < DateTime.Now;
+                            bool isWithinFifteenMinutes = item.Date >= DateTime.Now && item.Date <= fifteenMinutesLater;
+                            string colorStyle = isExpired ? "color: red;" : (isWithinFifteenMinutes ? "color: green;" : "color: gray;");
+                            string fontWeightStyle = isExpired || isWithinFifteenMinutes ? "font-weight: none;" : "";
                     }
-                    else if (item.Date < DateTime.Now.AddMinutes(15))
-                    {
-                        item.IsSlotActive = true;
-                        <span style="color: green; font-weight: bold;">Active</span>
+                    <td style="@colorStyle @fontWeightStyle">
+                                @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @if (item.Date < DateTime.Now)
+                        {
+                            item.IsSlotActive = false;
+                            <span style="color: red;">Passed</span>
+                        }
+                        else if (item.Date < DateTime.Now.AddMinutes(15))
+                        {
+                            item.IsSlotActive = true;
+                            <span style="color: green; font-weight: bold;">Active</span>
+                        }
+                        else
+                        {
+                            item.IsSlotActive = true;
+                            <span style="color: gray;">Inactive</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+            else if (item.Student.Mail == User.Identity.Name)
+            {
+                <tr>
+                    <td>
+                        <a href="mailto:@(item.Dean.Mail)">@item.Dean.FullName</a>
+                    </td>
+                    <td>
+                        <a href="mailto:@(item.Student.Mail)">@item.Student.FullName</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reason)
+                    </td>
+                    @{
+                        DateTime fifteenMinutesLater = DateTime.Now.AddMinutes(15);
+                        bool isExpired = item.Date < DateTime.Now;
+                        bool isWithinFifteenMinutes = item.Date >= DateTime.Now && item.Date <= fifteenMinutesLater;
+                        string colorStyle = isExpired ? "color: red;" : (isWithinFifteenMinutes ? "color: green;" : "color: gray;");
+                        string fontWeightStyle = isExpired || isWithinFifteenMinutes ? "font-weight: none;" : "";
                     }
-                    else
-                    {
-                        item.IsSlotActive = true;
-                        <span style="color: gray;">Inactive</span>
+                    <td style="@colorStyle @fontWeightStyle">
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @if (item.Date < DateTime.Now)
+                        {
+                            item.IsSlotActive = false;
+                            <span style="color: red;">Passed</span>
+                        }
+                        else if (item.Date < DateTime.Now.AddMinutes(15))
+                        {
+                            item.IsSlotActive = true;
+                            <span style="color: green; font-weight: bold;">Active</span>
+                        }
+                        else
+                        {
+                            item.IsSlotActive = true;
+                            <span style="color: gray;">Inactive</span>
+                        }
+                    </td>
+                    <td>                        
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>                        
+                    </td>
+                </tr>
+            }
+            else if (item.Dean.Mail == User.Identity.Name)
+            {
+                <tr>
+                    <td>
+                        <a href="mailto:@(item.Dean.Mail)">@item.Dean.FullName</a>
+                    </td>
+                    <td>
+                        <a href="mailto:@(item.Student.Mail)">@item.Student.FullName</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reason)
+                    </td>
+                    @{
+                        DateTime fifteenMinutesLater = DateTime.Now.AddMinutes(15);
+                        bool isExpired = item.Date < DateTime.Now;
+                        bool isWithinFifteenMinutes = item.Date >= DateTime.Now && item.Date <= fifteenMinutesLater;
+                        string colorStyle = isExpired ? "color: red;" : (isWithinFifteenMinutes ? "color: green;" : "color: gray;");
+                        string fontWeightStyle = isExpired || isWithinFifteenMinutes ? "font-weight: none;" : "";
                     }
-                </td>
-
-
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+                    <td style="@colorStyle @fontWeightStyle">
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @if (item.Date < DateTime.Now)
+                        {
+                            item.IsSlotActive = false;
+                            <span style="color: red;">Passed</span>
+                        }
+                        else if (item.Date < DateTime.Now.AddMinutes(15))
+                        {
+                            item.IsSlotActive = true;
+                            <span style="color: green; font-weight: bold;">Active</span>
+                        }
+                        else
+                        {
+                            item.IsSlotActive = true;
+                            <span style="color: gray;">Inactive</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
 </table>
+

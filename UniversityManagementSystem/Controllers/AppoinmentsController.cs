@@ -11,7 +11,7 @@ using UniversityManagementSystem.Models;
 
 namespace UniversityManagementSystem.Controllers
 {
-    //[Authorize(Roles ="Student,Dean")]
+    [Authorize]
     public class AppoinmentsController : Controller
     {
         private readonly UniversityManagementSysDbContext _context;
@@ -49,6 +49,7 @@ namespace UniversityManagementSystem.Controllers
         }
 
         // GET: Appoinments/Create
+        [Authorize(Roles = "Administrator,Dean,Student")]
         public IActionResult Create()
         {
             // Old
@@ -98,6 +99,7 @@ namespace UniversityManagementSystem.Controllers
         }
 
         // GET: Appoinments/Edit/5
+        [Authorize(Roles = "Administrator,Dean")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Appoinments == null)
@@ -153,6 +155,7 @@ namespace UniversityManagementSystem.Controllers
         }
 
         // GET: Appoinments/Delete/5
+        [Authorize(Roles = "Administrator,Dean")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Appoinments == null)

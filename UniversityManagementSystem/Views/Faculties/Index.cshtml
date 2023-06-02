@@ -21,7 +21,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Dean)
-            </th>*
+            </th>
             <th>Departments</th>
             <th></th>
         </tr>
@@ -40,19 +40,21 @@
             </td>
             <td>
                     @foreach (var department in item.Departments)
-                    {
-                        @*<p class="m-1">@department.Name</p>*@
+                    {                        
                         <p>
                             <a asp-action="Details" asp-controller="Departments" asp-route-id="@department.Id">@department.Name</a>
                         </p>
                     }
              </td>
 
+           @if (User.IsInRole("Administrator") || User.IsInRole("Dean"))
+           {
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
+           }
         </tr>
 }
     </tbody>

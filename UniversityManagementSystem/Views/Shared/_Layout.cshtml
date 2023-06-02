@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
+        <nav class="navbar sticky-top navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">UMS</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -19,12 +19,20 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link text-white" asp-area="" asp-controller="AppRoles" asp-action="Index">Roles</a>
-                        </li>
+
+                        @if (User.IsInRole("Administrator"))
+                        {
+                             <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Admin
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item text-primary bg-white" asp-area="" asp-controller="AppRoles" asp-action="Index">Roles</a></li>
+                                    <!-- Add other authorized dropdown items here -->
+                                </ul>
+                             </li>
+                        }                       
+
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Deans" asp-action="Index">Deans</a>
                         </li>
@@ -54,10 +62,13 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Appoinments" asp-action="Index">Appoinments</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="DepartmentsCourses" asp-action="Index">Dep Courses</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="DepartmentsCourses" asp-action="Index">Dep Courses</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
 
                        
@@ -75,7 +86,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - UMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - UMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> For &#64;<a href="mailto:administrator@ums.com">Help</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

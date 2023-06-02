@@ -6,10 +6,10 @@
 }
 
 <h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (User.IsInRole("Administrator") || User.IsInRole("Dean"))
+{
+    <p><a asp-action="Create">Create New</a></p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -20,49 +20,144 @@
                 @Html.DisplayNameFor(model => model.Course)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Semester)
+                @Html.DisplayNameFor(model => model.Grade)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Year)
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Course.Lecturer.Mail)*@
+                @Html.DisplayNameFor(model => model.Semester)
+            </th>
+            <th>
                 Lecturer Mail
             </th>
-@*            <th>
-                @Html.DisplayNameFor(model => model.EnrolDate)
-            </th>*@
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Course.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Semester)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Year)
-            </td>
-            <td>@*
-                    @Html.DisplayFor(modelItem => item.Course.Lecturer.Mail)*@
-                    <a href="mailto:@(item.Course.Lecturer.Mail)">@item.Course.Lecturer.Mail</a>
-            </td>
-@*            <td>
-                @Html.DisplayFor(modelItem => item.EnrolDate)
-            </td>*@
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            @if (item.Course.Lecturer.Mail == User.Identity.Name)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.Name)
+                    </td>
+                    <td>
+
+                        @if (item.Grade == 0)
+                        {
+                            <text>not set</text>
+                        }
+                        else if (item.Grade < 3)
+                        {
+                            <span style="color: red;">@Html.DisplayFor(modelItem => item.Grade)</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Grade)
+                        }
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Semester)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Year)
+                    </td>
+                    <td>
+                        <a href="mailto:@(item.Course.Lecturer.Mail)">@item.Course.Lecturer.FullName</a>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                    </td>
+                </tr>
+            }
+            else if (item.Student.Mail == User.Identity.Name)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.Name)
+                    </td>
+                    <td>
+
+                        @if (item.Grade == 0)
+                        {
+                            <text>not set</text>
+                        }
+                        else if (item.Grade < 3)
+                        {
+                            <span style="color: red;">@Html.DisplayFor(modelItem => item.Grade)</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Grade)
+                        }
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Semester)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Year)
+                    </td>
+                    <td>
+                        <a href="mailto:@(item.Course.Lecturer.Mail)">@item.Course.Lecturer.FullName</a>
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    </td>
+                </tr>
+            }
+            else if (User.IsInRole("Administrator") || User.IsInRole("Dean"))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.Name)
+                    </td>
+                    <td>
+
+                        @if (item.Grade == 0)
+                        {
+                            <text>not set</text>
+                        }
+                        else if (item.Grade < 3)
+                        {
+                            <span style="color: red;">@Html.DisplayFor(modelItem => item.Grade)</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Grade)
+                        }
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Semester)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Year)
+                    </td>
+                    <td>
+                        <a href="mailto:@(item.Course.Lecturer.Mail)">@item.Course.Lecturer.FullName</a>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
 </table>

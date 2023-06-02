@@ -50,7 +50,7 @@ namespace UniversityManagementSystem.Controllers
         }
 
         // GET: Lecturers/Create
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator,Dean")]
         public IActionResult Create()
         {
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Name");
@@ -75,7 +75,7 @@ namespace UniversityManagementSystem.Controllers
         }
 
         // GET: Lecturers/Edit/5
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator,Dean")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Lecturers == null)
@@ -129,7 +129,7 @@ namespace UniversityManagementSystem.Controllers
         }
 
         // GET: Lecturers/Delete/5
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator,Dean")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Lecturers == null)

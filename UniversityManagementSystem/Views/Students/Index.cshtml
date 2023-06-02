@@ -13,12 +13,6 @@
 <table class="table">
     <thead>
         <tr>
-@*            <th>
-                @Html.DisplayNameFor(model => model.Fname)
-            </th>
-@*            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.FullName)
             </th>
@@ -29,7 +23,6 @@
                 @Html.DisplayNameFor(model => model.Address)
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Dob)*@
                 Age
             </th>
             <th>
@@ -63,11 +56,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Department.Name)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+
+            @if (User.IsInRole("Administrator") || User.IsInRole("Dean"))
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            }
         </tr>
 }
     </tbody>

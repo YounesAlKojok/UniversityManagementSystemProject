@@ -6,10 +6,11 @@
 }
 
 <h1>Index</h1>
+@if (User.IsInRole("Administrator") || User.IsInRole("Dean"))
+{
+    <p><a asp-action="Create">Create New</a></p>
+}
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -55,11 +56,23 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Lecturer.FullName)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            @if (User.IsInRole("Administrator") || User.IsInRole("Dean"))
+            {
+
+                <td>
+
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            }else
+            {
+                <td>
+
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>                        
+                </td>
+            }
+
         </tr>
 }
     </tbody>
