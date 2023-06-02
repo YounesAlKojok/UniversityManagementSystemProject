@@ -17,10 +17,12 @@ public partial class Appoinment
 
     public int StudentId { get; set; }
 
+    // New - properties to include a property for the day of the week
+    public DayOfWeek DayOfWeek => Date.DayOfWeek;
+
     public virtual Dean? Dean { get; set; } = null!;
 
     public virtual Student? Student { get; set; } = null!;
-
 
 
     // addon methods and new var
@@ -28,7 +30,6 @@ public partial class Appoinment
     public bool IsSlotActive { get; set; } = true;
 
 }
-
 
 
 

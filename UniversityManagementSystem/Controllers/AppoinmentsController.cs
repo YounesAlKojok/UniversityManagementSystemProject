@@ -51,8 +51,30 @@ namespace UniversityManagementSystem.Controllers
         // GET: Appoinments/Create
         public IActionResult Create()
         {
-            ViewData["DeanId"] = new SelectList(_context.Deans, "Id","FullName" ,"Mail");
+            // Old
+            //ViewData["DeanId"] = new SelectList(_context.Deans, "Id","FullName" ,"Mail");
+            //ViewData["StudentId"] = new SelectList(_context.Students, "Id", "FullName");
+            //return View();
+
+            // New
+            DateTime now = DateTime.Now;
+            DateTime today = new DateTime(now.Year, now.Month, now.Day);
+
+            // Filter available slots based on the requirements
+            var availableSlots = new List<DateTime>();
+            for (int i = 0; i < 4; i++)
+            {
+                DateTime slot = today.AddHours(12).AddMinutes(i * 15);
+                if (slot.DayOfWeek >= DayOfWeek.Monday && slot.DayOfWeek <= DayOfWeek.Thursday)
+                {
+                    availableSlots.Add(slot);
+                }
+            }
+
+            ViewData["DeanId"] = new SelectList(_context.Deans, "Id", "FullName", "Mail");
             ViewData["StudentId"] = new SelectList(_context.Students, "Id", "FullName");
+            ViewData["AvailableSlots"] = availableSlots;
+
             return View();
         }
 
@@ -65,6 +87,7 @@ namespace UniversityManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                appoinment.Duration = 15; //N
                 _context.Add(appoinment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

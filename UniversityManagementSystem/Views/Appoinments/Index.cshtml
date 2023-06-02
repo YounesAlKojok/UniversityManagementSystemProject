@@ -37,9 +37,22 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+@*            <td style="@(item.Date < DateTime.Now ? "color: red;font-weight: bold;" : "")">
                 @Html.DisplayFor(modelItem => item.Date)
-            </td>
+            </td>*@
+                @{
+                    DateTime fifteenMinutesLater = DateTime.Now.AddMinutes(15);
+                    bool isExpired = item.Date < DateTime.Now;
+                    bool isWithinFifteenMinutes = item.Date >= DateTime.Now && item.Date <= fifteenMinutesLater;
+                    string colorStyle = isExpired ? "color: red;" : (isWithinFifteenMinutes ? "color: green;" : "color: gray;");
+                    string fontWeightStyle = isExpired || isWithinFifteenMinutes ? "font-weight: none;" : "";
+                }
+
+                <td style="@colorStyle @fontWeightStyle">
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+
+
             <td>
                 @Html.DisplayFor(modelItem => item.Duration)
             </td>
@@ -52,9 +65,29 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Student.Id)
             </td>
-            <td>
+@*            <td>
                 @Html.DisplayFor(modelItem => item.IsSlotActive)
-            </td>
+            </td>*@
+
+                <td>
+                    @if (item.Date < DateTime.Now)
+                    {
+                        item.IsSlotActive = false;
+                        <span style="color: red;">Passed</span>
+                    }
+                    else if (item.Date < DateTime.Now.AddMinutes(15))
+                    {
+                        item.IsSlotActive = true;
+                        <span style="color: green; font-weight: bold;">Active</span>
+                    }
+                    else
+                    {
+                        item.IsSlotActive = true;
+                        <span style="color: gray;">Inactive</span>
+                    }
+                </td>
+
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
