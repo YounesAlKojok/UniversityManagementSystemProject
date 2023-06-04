@@ -5,9 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Create Faculty</h1>
 
-<h4>Faculty</h4>
+
 <hr />
 @*<div asp-validation-summary="All"></div>*@
 <div class="row">
@@ -19,27 +19,28 @@
                 <input asp-for="Name" class="form-control" />
                 @*<span asp-validation-for="Name" class="text-danger"></span>*@
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="Location" class="control-label"></label>
                 <input asp-for="Location" class="form-control" />
                 @*<span asp-validation-for="Location" class="text-danger"></span>*@
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="DeanId" class="control-label"></label>
                 <select asp-for="DeanId" class ="form-control" asp-items="ViewBag.DeanId"></select>
             </div>
-
+            <hr />
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                <a class="btn btn-dark" asp-action="Index">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

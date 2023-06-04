@@ -34,8 +34,8 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item text-primary bg-white" asp-area="" asp-controller="Deans" asp-action="Index">Deans</a></li>
                                     <li><a class="dropdown-item text-primary bg-white" asp-area="" asp-controller="Faculties" asp-action="Index">Faculties</a></li>
-                                    <li><a class="dropdown-item text-primary bg-white" asp-area="" asp-controller="Departments" asp-action="Index">Dep</a></li>
-                                    <li><a class="dropdown-item text-primary bg-white" asp-area="" asp-controller="DepartmentsCourses" asp-action="Index">Dep Courses</a></li>
+                                    <li><a class="dropdown-item text-primary bg-white" asp-area="" asp-controller="Departments" asp-action="Index">Departments</a></li>
+                                    <li><a class="dropdown-item text-primary bg-white" asp-area="" asp-controller="DepartmentsCourses" asp-action="Index">Departments Courses</a></li>
                                     @if (User.IsInRole("Administrator"))
                                     {
                                         <li><a class="dropdown-item text-primary bg-white" asp-area="" asp-controller="AppRoles" asp-action="Index">Roles</a></li>                                                                            
@@ -55,7 +55,7 @@
                                 <a class="nav-link text-white" asp-area="" asp-controller="Grades" asp-action="Index">Grades</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Enrollments" asp-action="Index">Enrol</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Enrollments" asp-action="Index">Enrollments</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Appoinments" asp-action="Index">Appoinments</a>
@@ -92,7 +92,7 @@
                                 <a class="nav-link text-white" asp-area="" asp-controller="Grades" asp-action="Index">Grades</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Enrollments" asp-action="Index">Enrol</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Enrollments" asp-action="Index">Enrollments</a>
                             </li>
                             @if (User.IsInRole("Student"))
                             {
@@ -101,7 +101,7 @@
                                 </li>                                
                             }
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="DepartmentsCourses" asp-action="Index">Dep Courses</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="DepartmentsCourses" asp-action="Index">Departments Courses</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

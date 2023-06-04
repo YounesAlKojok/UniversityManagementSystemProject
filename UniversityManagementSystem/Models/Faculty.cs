@@ -1,15 +1,17 @@
-﻿using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Xml.Linq;
 
 namespace UniversityManagementSystem.Models
 {
     public partial class Faculty
     {
         public int Id { get; set; }
-
+        [Display(Name = "Dean")]
         public int DeanId { get; set; }
 
         public string Location { get; set; } = null!;
-
+        [Display(Name = "Faculty")]
         public string Name { get; set; } = null!;
 
 

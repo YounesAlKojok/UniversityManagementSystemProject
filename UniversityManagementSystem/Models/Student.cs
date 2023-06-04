@@ -12,13 +12,14 @@ namespace UniversityManagementSystem.Models
         [CustomValidateDob]
         [DataType(DataType.Date)]
         [Required]
+        [Display(Name ="Birth Date")]
         public DateTime? Dob { get; set; }
 
         [Display(Name = "First Name")]
         public string Fname { get; set; } = null!;
         [Display(Name = "Last Name")]
         public string Lname { get; set; } = null!;
-
+        [Display(Name ="Department")]
         public int DepartmentId { get; set; }
         [RegularExpression(@"^.+@ums\.com$", ErrorMessage = "The {0} field is not a valid email address.")]
         [Required]

@@ -15,6 +15,7 @@ namespace UniversityManagementSystem.Models
         [CustomValidateDob]
         [DataType(DataType.Date)]
         [Required]
+        [Display(Name = "Birth Date")]
         public DateTime? Dob { get; set; }
 
         [RegularExpression(@"^.+@ums\.com$", ErrorMessage = "The {0} field is not a valid email address.")]

@@ -6,7 +6,7 @@ namespace UniversityManagementSystem.Models
     public partial class Course
     {
         public int Id { get; set; }
-
+        [Display(Name = "Course")]
         public string Name { get; set; } = null!;
 
         public string? Code { get; set; }
@@ -14,9 +14,9 @@ namespace UniversityManagementSystem.Models
         public int Credit { get; set; }
 
         public string? Description { get; set; }
-
+        [Display(Name = "Lecturer")]
         public int? LecturerId { get; set; }
-
+        [Display(Name = "Faculty")]
         public int FacultyId { get; set; }
 
 

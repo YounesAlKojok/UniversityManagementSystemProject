@@ -74,18 +74,17 @@
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.Semester)
+                        @Html.DisplayFor(modelItem => item.Year)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Year)
+                        @Html.DisplayFor(modelItem => item.Semester)
                     </td>
                     <td>
                         <a href="mailto:@(item.Course.Lecturer.Mail)">@item.Course.Lecturer.FullName</a>
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+                        <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-info-circle"></i></a>
                     </td>
                 </tr>
             }
@@ -115,10 +114,10 @@
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.Semester)
+                        @Html.DisplayFor(modelItem => item.Year)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Year)
+                        @Html.DisplayFor(modelItem => item.Semester)
                     </td>
                     <td>
                         <a href="mailto:@(item.Course.Lecturer.Mail)">@item.Course.Lecturer.FullName</a>
@@ -149,23 +148,23 @@
                         }
                         else
                         {
-                            @Html.DisplayFor(modelItem => item.Grade)
+                            <span style="color:green">@Html.DisplayFor(modelItem => item.Grade)</span>
                         }
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.Semester)
+                        @Html.DisplayFor(modelItem => item.Year)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Year)
+                        @Html.DisplayFor(modelItem => item.Semester)
                     </td>
                     <td>
                         <a href="mailto:@(item.Course.Lecturer.Mail)">@item.Course.Lecturer.FullName</a>
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+                        <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-info-circle"></i></a>
+                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash3"></i></a>
                     </td>
                 </tr>
             }

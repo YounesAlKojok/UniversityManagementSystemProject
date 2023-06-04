@@ -1,13 +1,16 @@
-﻿namespace UniversityManagementSystem.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
+
+namespace UniversityManagementSystem.Models
 {
     public partial class Department
     {
         public int Id { get; set; }
-
+        [Display(Name = "Department")]
         public string Name { get; set; } = null!;
-
+        [Display(Name = "Dean")]
         public int DeanId { get; set; }
-
+        [Display(Name = "faculty")]
         public int FacultyId { get; set; }
 
         public virtual Dean? Dean { get; set; } = null!;
