@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/UniversityManagementSystem.styles.css" asp-append-version="true" />
+    @*add link for boostrap button*@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
     <header>
@@ -22,21 +24,118 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-
-                        @if (User.IsInRole("Administrator"))
+                        
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Dean"))
                         {
-                             <li class="nav-item dropdown">
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Admin
+                                    DropDown
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item text-primary bg-white" asp-area="" asp-controller="AppRoles" asp-action="Index">Roles</a></li>
-                                    <!-- Add other authorized dropdown items here -->
+                                    <li><a class="dropdown-item text-primary bg-white" asp-area="" asp-controller="Deans" asp-action="Index">Deans</a></li>
+                                    <li><a class="dropdown-item text-primary bg-white" asp-area="" asp-controller="Faculties" asp-action="Index">Faculties</a></li>
+                                    <li><a class="dropdown-item text-primary bg-white" asp-area="" asp-controller="Departments" asp-action="Index">Dep</a></li>
+                                    <li><a class="dropdown-item text-primary bg-white" asp-area="" asp-controller="DepartmentsCourses" asp-action="Index">Dep Courses</a></li>
+                                    @if (User.IsInRole("Administrator"))
+                                    {
+                                        <li><a class="dropdown-item text-primary bg-white" asp-area="" asp-controller="AppRoles" asp-action="Index">Roles</a></li>                                                                            
+                                    }
                                 </ul>
-                             </li>
-                        }                       
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Lecturers" asp-action="Index">Lecturers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Grades" asp-action="Index">Grades</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Enrollments" asp-action="Index">Enrol</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Appoinments" asp-action="Index">Appoinments</a>
+                            </li>                            
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                            </li>
+                        }
+                        else if (User.IsInRole("Lecturer") || User.IsInRole("Student"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Deans" asp-action="Index">Deans</a>
+                            </li>
 
-                        <li class="nav-item">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Faculties" asp-action="Index">Faculties</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Departments" asp-action="Index">Departments</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Lecturers" asp-action="Index">Lecturers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Grades" asp-action="Index">Grades</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Enrollments" asp-action="Index">Enrol</a>
+                            </li>
+                            @if (User.IsInRole("Student"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Appoinments" asp-action="Index">Appoinments</a>
+                                </li>                                
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="DepartmentsCourses" asp-action="Index">Dep Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                            </li>
+
+                        }else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Deans" asp-action="Index">Deans</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Faculties" asp-action="Index">Faculties</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Departments" asp-action="Index">Departments</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                            </li>
+
+                        }
+
+
+                        @*<li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Deans" asp-action="Index">Deans</a>
                         </li>
 
@@ -47,13 +146,13 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Departments" asp-action="Index">Dep</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Lecturers" asp-action="Index">Lecturers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Grades" asp-action="Index">Grades</a>
@@ -72,9 +171,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="About">About</a>
-                        </li>
+                        </li>*@
 
-                       
+
                     </ul>
                 </div>
             </div>
@@ -88,6 +187,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
+
         <div class="container">
             &copy; 2023 - UMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> For &#64;<a href="mailto:administrator@ums.com">Help</a>
         </div>

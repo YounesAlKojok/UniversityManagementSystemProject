@@ -69,10 +69,11 @@ namespace UniversityManagementSystem.Controllers
             {
                 _context.Add(course);
                 await _context.SaveChangesAsync();
+                //TempData["Success"] = "Course was created";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Id", course.FacultyId);
-            ViewData["LecturerId"] = new SelectList(_context.Lecturers, "Id", "Id", course.LecturerId);
+            ViewData["LecturerId"] = new SelectList(_context.Lecturers, "Id", "Id", course.LecturerId);            
             return View(course);
         }
 

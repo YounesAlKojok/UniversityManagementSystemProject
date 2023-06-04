@@ -5,12 +5,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
-@if (User.IsInRole("Administrator") || User.IsInRole("Dean"))
-{
-    <p><a asp-action="Create">Create New</a></p>
-}
-<table class="table">
+<h1 class="iTitle">Enrollments</h1>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6 text-start">
+            @if (User.IsInRole("Administrator") || User.IsInRole("Dean"))
+            {
+                <a asp-action="Create" class="btn btn-outline-primary"><i class="bi bi-plus-circle"></i> Create New</a>
+            }            
+        </div>
+        <div class="col-6 text-end">
+            <p><button class="btn btn-primary" onclick="printTable()"><i class="bi bi-printer"></i> &nbspPrint</button></p>
+        </div>
+    </div>
+</div>
+
+<table class="table" id="enrollmentTable">
     <thead>
         <tr>
             <th>
@@ -58,7 +69,7 @@
                         }
                         else
                         {
-                            @Html.DisplayFor(modelItem => item.Grade)
+                            <span style="color:green">@Html.DisplayFor(modelItem => item.Grade)</span>
                         }
                     </td>
 
@@ -99,7 +110,7 @@
                         }
                         else
                         {
-                            @Html.DisplayFor(modelItem => item.Grade)
+                            <span style="color:green">@Html.DisplayFor(modelItem => item.Grade)</span>
                         }
                     </td>
 
@@ -160,4 +171,17 @@
             }
         }
     </tbody>
+
+    <script>
+        function printTable() {
+            var printContents = document.getElementById("enrollmentTable").outerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+    
+
 </table>

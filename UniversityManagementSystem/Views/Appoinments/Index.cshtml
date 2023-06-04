@@ -5,10 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1 class="iTitle">Appointments</h1>
+
+
+
 @if (User.IsInRole("Administrator") || User.IsInRole("Dean") || User.IsInRole("Student"))
 {
-    <p><a asp-action="Create">Create New</a></p>
+    <p><a asp-action="Create" class="btn btn-outline-primary"><i class="bi bi-plus-circle"></i> Create New</a></p>
 }
 <table class="table">
     <thead>

@@ -17,6 +17,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<UniversityManagementSysDbContext>();
 
+
+
 // Register the custom exception handling middleware
 var app = builder.Build();
 

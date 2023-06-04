@@ -12,7 +12,7 @@ using UniversityManagementSystem.Models;
 
 namespace UniversityManagementSystem.Controllers
 {
-    [Authorize(Roles = "Administrator,Dean")]
+    [Authorize]
     public class DepartmentsCoursesController : Controller
     {
         private readonly UniversityManagementSysDbContext _context;
@@ -30,6 +30,7 @@ namespace UniversityManagementSystem.Controllers
         }
 
         // GET: DepartmentsCourses/Details/5
+        [Authorize(Roles = "Administrator,Dean")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.DepartmentsCourses == null)
@@ -76,6 +77,7 @@ namespace UniversityManagementSystem.Controllers
         }
 
         // GET: DepartmentsCourses/Edit/5
+        [Authorize(Roles = "Administrator,Dean")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.DepartmentsCourses == null)

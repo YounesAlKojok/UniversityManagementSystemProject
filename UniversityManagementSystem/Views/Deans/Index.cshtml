@@ -5,12 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="text-center">Deans</h1>
+<h1 class="iTitle">Deans</h1>
 
 @if (User.IsInRole("Administrator"))
 {
     <p>
-        <a asp-action="Create" type="button" class="btn btn-outline-primary">Create New</a>
+        <a asp-action="Create" class="btn btn-outline-primary"><i class="bi bi-plus-circle"></i> Create New</a>
     </p>
 }
 
