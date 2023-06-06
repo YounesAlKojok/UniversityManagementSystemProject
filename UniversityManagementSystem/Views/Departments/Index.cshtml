@@ -10,8 +10,8 @@
 {
     <p><a asp-action="Create" class="btn btn-outline-primary"><i class="bi bi-plus-circle"></i> Create New</a></p>    
 }
-<table class="table">
-    <thead>
+<table class="table table-bordered border-primary text-center table-hover">
+    <thead class="table-active">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -22,7 +22,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.Faculty)
             </th>
-            <th></th>
+            <th>
+                Student Count
+            </th>
+            <th>
+                Course Count
+            </th>
+            @if (User.IsInRole("Administrator") || User.IsInRole("Deans"))
+            {
+                <th>Action</th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -31,19 +40,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.Dean.Mail)*@
+            <td>                
                 <a href="mailto:@(item.Dean.Mail)">@item.Dean.Mail</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Faculty.Name)
             </td>
-@*            <td>
-                    @Html.DisplayFor(modelItem => item.Faculty.GetcourseCount())
-            </td>*@
-@*            <td>
-                    @Html.DisplayFor(modelItem => item.Faculty.GetcourseCount())
-            </td>*@
+            <td>
+                @*@item.Students.Count*@
+                @item.GetStudentCount()
+            </td>
+            <td>                
+                @item.GetCourseCount()
+            </td>
+
             @if (User.IsInRole("Administrator") || User.IsInRole("Dean"))
             {
             <td>

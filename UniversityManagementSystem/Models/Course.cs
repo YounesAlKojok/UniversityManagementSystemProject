@@ -19,7 +19,6 @@ namespace UniversityManagementSystem.Models
         [Display(Name = "Faculty")]
         public int FacultyId { get; set; }
 
-
         public virtual Faculty? Faculty { get; set; } = null!;
         public virtual Lecturer? Lecturer { get; set; }
 

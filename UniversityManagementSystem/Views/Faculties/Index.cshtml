@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<UniversityManagementSystem.Models.Faculty>
+@using PagedList.Mvc
 
 @{
     ViewData["Title"] = "Index";
@@ -11,8 +12,8 @@
     <p><a asp-action="Create" class="btn btn-outline-primary"><i class="bi bi-plus-circle"></i> Create New</a></p>
 }
 
-<table class="table table-hover" >
-    <thead>
+<table class="table table-bordered border-primary text-center table-hover">
+    <thead class="table-active">
         <tr class="table-active">
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -24,7 +25,10 @@
                 @Html.DisplayNameFor(model => model.Dean)
             </th>
             <th>Departments</th>
-            <th></th>
+            @if (User.IsInRole("Administrator") || User.IsInRole("Deans"))
+            {
+                <th>Action</th>
+            }
         </tr>
     </thead>
     <tbody>

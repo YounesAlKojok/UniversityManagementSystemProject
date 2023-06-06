@@ -15,9 +15,9 @@
 }
 
 
-<table class="table">
-    <thead>
-        <tr>
+<table class="table table-bordered border-primary text-center table-hover">
+    <thead class="table-active">
+        <tr >
             <th>
                 @Html.DisplayNameFor(model => model.FullName)
             </th>
@@ -28,7 +28,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.Office)
             </th>
-            <th></th>
+            @if (User.IsInRole("Administrator") || User.IsInRole("Deans"))
+            {
+                <th>Action</th>                
+            }
         </tr>
     </thead>
     <tbody>

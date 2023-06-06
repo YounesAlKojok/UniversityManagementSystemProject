@@ -10,8 +10,8 @@
 <p>
     <a asp-action="Create" class="btn btn-outline-primary"><i class="bi bi-plus-circle"></i> Create New</a>
 </p>
-<table class="table">
-    <thead>
+<table class="table table-bordered border-primary text-center table-hover">
+    <thead class="table-active">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Score)
@@ -22,7 +22,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Student)
             </th>
-            <th></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>

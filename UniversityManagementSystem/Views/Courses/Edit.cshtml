@@ -28,7 +28,14 @@
             <br />
             <div class="form-group">
                 <label asp-for="Credit" class="control-label"></label>
-                <input asp-for="Credit" class="form-control" />
+                <select asp-for="Credit" class="form-control">
+                    <option value="" disabled selected>-- Select Credits --</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>  
+                </select>
                 <span asp-validation-for="Credit" class="text-danger"></span>
             </div>
             <br />

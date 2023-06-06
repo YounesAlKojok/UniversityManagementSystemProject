@@ -11,8 +11,8 @@
     <p><a asp-action="Create" class="btn btn-outline-primary"><i class="bi bi-plus-circle"></i> Create New</a></p>
     
 }
-<table class="table">
-    <thead>
+<table class="table table-bordered border-primary text-center table-hover">
+    <thead class="table-active">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.FullName)
@@ -29,23 +29,20 @@
             <th>
                 @Html.DisplayNameFor(model => model.Department)
             </th>
-            <th></th>
+             @if (User.IsInRole("Administrator") || User.IsInRole("Deans"))
+            {
+                <th>Action</th>                
+            }
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Fname)
-            </td>
-@*            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>*@
+        <tr>  
             <td>
                 @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
-                @*@Html.DisplayFor(modelItem => item.Mail)*@
+                
                     <a href="mailto:@(item.Mail)">@item.Mail</a>
             </td>
             <td>
