@@ -66,6 +66,7 @@ namespace UniversityManagementSystem.Controllers
             {
                 _context.Add(student);
                 await _context.SaveChangesAsync();
+                TempData["Success"] = "Student record was created";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Id", student.DepartmentId);
@@ -120,6 +121,7 @@ namespace UniversityManagementSystem.Controllers
                         throw;
                     }
                 }
+                TempData["Edit"] = "Student record was Modified";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Id", student.DepartmentId);
@@ -162,6 +164,7 @@ namespace UniversityManagementSystem.Controllers
             }
             
             await _context.SaveChangesAsync();
+            TempData["Delete"] = "Student record was Deleted";
             return RedirectToAction(nameof(Index));
         }
 

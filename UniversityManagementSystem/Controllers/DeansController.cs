@@ -66,6 +66,7 @@ namespace UniversityManagementSystem.Controllers
             {
                 _context.Add(dean);
                 await _context.SaveChangesAsync();
+                TempData["Success"] = "Dean record was created";
                 return RedirectToAction(nameof(Index));
             }
             return View(dean);
@@ -118,6 +119,7 @@ namespace UniversityManagementSystem.Controllers
                         throw;
                     }
                 }
+                TempData["Edit"] = "Deparment record was Modified";
                 return RedirectToAction(nameof(Index));
             }
             return View(dean);
@@ -158,6 +160,7 @@ namespace UniversityManagementSystem.Controllers
             }
             
             await _context.SaveChangesAsync();
+            TempData["Edit"] = "Deparment record was Deleted";
             return RedirectToAction(nameof(Index));
         }
 

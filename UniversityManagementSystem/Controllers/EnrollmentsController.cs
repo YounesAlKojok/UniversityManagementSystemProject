@@ -69,6 +69,7 @@ namespace UniversityManagementSystem.Controllers
             {
                 _context.Add(enrollment);
                 await _context.SaveChangesAsync();
+                TempData["Success"] = "Enrollment record was created";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Id", enrollment.CourseId);
@@ -145,6 +146,7 @@ namespace UniversityManagementSystem.Controllers
                             throw;
                         }
                     }
+                    TempData["Edit"] = "Enrollment record was Modified";
                     return RedirectToAction(nameof(Index));
                 }
                 ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Name", enrollment.CourseId);
@@ -194,6 +196,7 @@ namespace UniversityManagementSystem.Controllers
             }
             
             await _context.SaveChangesAsync();
+            TempData["Edit"] = "Enrollment record was Deleted";
             return RedirectToAction(nameof(Index));
         }
 

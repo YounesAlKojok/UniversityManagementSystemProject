@@ -91,6 +91,7 @@ namespace UniversityManagementSystem.Controllers
                 appoinment.Duration = 15; //N
                 _context.Add(appoinment);
                 await _context.SaveChangesAsync();
+                TempData["Success"] = "Appoinment was created";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DeanId"] = new SelectList(_context.Deans, "Id", "Mail", appoinment.DeanId);
@@ -147,6 +148,7 @@ namespace UniversityManagementSystem.Controllers
                         throw;
                     }
                 }
+                TempData["Edit"] = "Appoinment was Modified";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DeanId"] = new SelectList(_context.Deans, "Id", "Mail", appoinment.DeanId);
@@ -191,6 +193,7 @@ namespace UniversityManagementSystem.Controllers
             }
             
             await _context.SaveChangesAsync();
+            TempData["Edit"] = "Appoinment was Deleted";
             return RedirectToAction(nameof(Index));
         }
 

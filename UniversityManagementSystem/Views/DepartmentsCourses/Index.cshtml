@@ -5,6 +5,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (TempData["Success"]!=null)
+{
+    <h2 class="text-success">@TempData["Success"]</h2>
+}
+else if (TempData["Delete"] != null)
+{
+    <h2 class="text-danger">@TempData["Delete"]</h2>
+}
+else if (TempData["Edit"] != null)
+{
+    <h2 class="text-warning">@TempData["Edit"]</h2>    
+}
+
+
     <h1 class="iTitle">Departments Courses</h1>
 @if (User.IsInRole("Administrator") || User.IsInRole("Dean"))
 {

@@ -74,6 +74,7 @@ namespace UniversityManagementSystem.Controllers
             {
                 _context.Add(faculty);
                 await _context.SaveChangesAsync();
+                TempData["Success"] = "Faculty record was created";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DeanId"] = new SelectList(_context.Deans, "Id", "Mail", faculty.DeanId);
@@ -128,6 +129,7 @@ namespace UniversityManagementSystem.Controllers
                         throw;
                     }
                 }
+                TempData["Edit"] = "Faculty record was Modified";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DeanId"] = new SelectList(_context.Deans, "Id", "Mail", faculty.DeanId);
@@ -170,6 +172,7 @@ namespace UniversityManagementSystem.Controllers
             }
             
             await _context.SaveChangesAsync();
+            TempData["Edit"] = "Faculty record was Deleted";
             return RedirectToAction(nameof(Index));
         }
 
