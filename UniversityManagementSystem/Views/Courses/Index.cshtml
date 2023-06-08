@@ -60,9 +60,18 @@ else if (TempData["Edit"] != null)
             <td>
                 @Html.DisplayFor(modelItem => item.Faculty.Name)
             </td>
-            <td>
-               
-                 <a href="mailto:@(item.Lecturer.Mail)">@item.Lecturer.FullName</a>
+            <td>               
+                 @*<a href="mailto:@(item.Lecturer.Mail)">@item.Lecturer.FullName</a>*@
+
+                    @if (item.Lecturer.Mail == "NotSet@ums.com")
+                    {
+                        @item.Lecturer.FullName
+                    }
+                    else
+                    {
+                        <a href="mailto:@(item.Lecturer.Mail)">@item.Lecturer.FullName</a>
+                    }
+
             </td>
             @if (User.IsInRole("Administrator") || User.IsInRole("Dean"))
             {

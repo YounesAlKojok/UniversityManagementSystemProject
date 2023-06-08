@@ -10,13 +10,19 @@ namespace UniversityManagementSystem.Models
         public string Name { get; set; } = null!;
 
         public string? Code { get; set; }
-        [Range(3, 7, ErrorMessage = "Valid credits are in range of 3 till 7.")]
+        [Range(0, 7, ErrorMessage = "Valid credits are in range of 3 till 7.")]
         public int Credit { get; set; }
 
         public string? Description { get; set; }
+        [Display(Name ="Day Of Study")]
+        public string DayOfStudy { get; set; }
+        [Display(Name ="Time Of Study")]
+        public string TimeOfStudy { get; set; }
+
         [Display(Name = "Lecturer")]
         public int? LecturerId { get; set; }
         [Display(Name = "Faculty")]
+        [Required(ErrorMessage ="Field is required")]
         public int FacultyId { get; set; }
 
         public virtual Faculty? Faculty { get; set; } = null!;

@@ -31,6 +31,7 @@
                 <select asp-for="Credit" class="form-control">
                     <option value="" disabled selected>-- Select Credits --</option>
                     <option value="3">3</option>
+                    <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
                     <option value="6">6</option>
@@ -39,10 +40,38 @@
                 <span asp-validation-for="Credit" class="text-danger"></span>
             </div>
             <br />
+            <br />
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DayOfStudy" class="control-label"></label>
+                <select asp-for="DayOfStudy" class="form-control">
+                    <option value="" disabled selected>-- Select Day --</option>
+                    <option value="Not Set">Not Set</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                </select>
+                <span asp-validation-for="DayOfStudy" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="TimeOfStudy" class="control-label"></label>
+                <select asp-for="TimeOfStudy" class="form-control">
+                    <option value="" disabled selected>-- Select Time --</option>
+                    <option value="Not Set">Not Set</option>
+                    <option value="08:15-10:00">08:15-10:00</option>
+                    <option value="10:15-12:00">10:15-12:00</option>
+                    <option value="12:15-14:00">12:15-14:00</option>
+                    <option value="14:15-16:00">14:15-16:00</option>
+                    <option value="16:15-10:00">16:15-10:00</option>
+                </select>
+                <span asp-validation-for="TimeOfStudy" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
