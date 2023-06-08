@@ -23,18 +23,7 @@ namespace UniversityManagementSystem.Models
 
 
         //addon methods and new var
-
-        // GetCourseCount: a method that returns the count of courses associated with the department.
-        public int? GetcourseCount()
-        {
-            if (Courses.Count > 0)
-            {
-                return Courses.Count;
-            }
-            return 0;
-        }
-
-
+        
         /*method uses LINQ's Select method to project each faculty's name from the Faculties collection and converts result
             * into a List<string> using the ToList method.It returns a list of faculty names associated with the department.
            */
@@ -53,5 +42,6 @@ namespace UniversityManagementSystem.Models
             return sb.ToString();
         }
 
+        public int GetCourseCount() { return Courses.Count; }
     }
 }

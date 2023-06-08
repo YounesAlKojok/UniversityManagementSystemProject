@@ -25,7 +25,9 @@ namespace UniversityManagementSystem.Controllers
         // GET: Lecturers
         public async Task<IActionResult> Index()
         {
-            var universityManagementSysDbContext = _context.Lecturers.Include(l => l.Faculty);
+            var universityManagementSysDbContext = _context.Lecturers
+                .Include(l => l.Faculty)
+                .Include(l => l.Courses);
             return View(await universityManagementSysDbContext.ToListAsync());
         }
 
@@ -40,6 +42,7 @@ namespace UniversityManagementSystem.Controllers
 
             var lecturer = await _context.Lecturers
                 .Include(l => l.Faculty)
+                .Include(l => l.Courses)                
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (lecturer == null)
             {

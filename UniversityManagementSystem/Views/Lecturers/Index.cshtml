@@ -40,6 +40,7 @@ else if (TempData["Edit"] != null)
             <th>
                 @Html.DisplayNameFor(model => model.Faculty)
             </th>
+            <th>HasCourse</th>
             @if (User.IsInRole("Administrator") || User.IsInRole("Deans"))
             {
                 <th>Action</th>
@@ -60,6 +61,7 @@ else if (TempData["Edit"] != null)
             <td>
                 @Html.DisplayFor(modelItem => item.Faculty.Name)
             </td>
+            <td>@item.HasCourses()</td>
              @if (User.IsInRole("Administrator") || User.IsInRole("Dean"))
              {
                 <td>

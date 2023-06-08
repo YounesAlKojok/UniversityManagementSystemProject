@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<UniversityManagementSystem.Models.Faculty>
-@using PagedList.Mvc
+
 
 @{
     ViewData["Title"] = "Index";
@@ -38,6 +38,7 @@ else if (TempData["Edit"] != null)
                 @Html.DisplayNameFor(model => model.Dean)
             </th>
             <th>Departments</th>
+            <th>Courses</th>
             @if (User.IsInRole("Administrator") || User.IsInRole("Deans"))
             {
                 <th>Action</th>
@@ -64,6 +65,7 @@ else if (TempData["Edit"] != null)
                         </p>
                     }
              </td>
+             <td>@item.GetCourseCount()</td>
 
            @if (User.IsInRole("Administrator") || User.IsInRole("Dean"))
            {

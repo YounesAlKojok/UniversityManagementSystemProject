@@ -119,7 +119,7 @@ namespace UniversityManagementSystem.Controllers
                         throw;
                     }
                 }
-                TempData["Edit"] = "Deparment record was Modified";
+                TempData["Edit"] = "Dean record was Modified";
                 return RedirectToAction(nameof(Index));
             }
             return View(dean);
@@ -160,7 +160,7 @@ namespace UniversityManagementSystem.Controllers
             }
             
             await _context.SaveChangesAsync();
-            TempData["Edit"] = "Deparment record was Deleted";
+            TempData["Edit"] = "Dean record was Deleted";
             return RedirectToAction(nameof(Index));
         }
 

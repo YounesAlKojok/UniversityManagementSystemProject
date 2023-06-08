@@ -32,9 +32,9 @@ else if (TempData["Edit"] != null)
             <th>
                 @Html.DisplayNameFor(model => model.Mail)
             </th>
-            <th>
+@*            <th>
                 @Html.DisplayNameFor(model => model.Address)
-            </th>
+            </th>*@
             <th>
                 Age
             </th>
@@ -57,9 +57,9 @@ else if (TempData["Edit"] != null)
                 
                     <a href="mailto:@(item.Mail)">@item.Mail</a>
             </td>
-            <td>
+@*            <td>
                 @Html.DisplayFor(modelItem => item.Address)
-            </td>
+            </td>*@
             <td>
                 @item.CalculateAge()
             </td>

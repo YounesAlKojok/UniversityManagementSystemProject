@@ -31,6 +31,7 @@ namespace UniversityManagementSystem.Controllers
             var faculties = await _context.Faculties
          .Include(f => f.Dean)
          .Include(f => f.Departments)
+         .Include(f => f.Courses)
          .ToListAsync();
 
             return View(faculties);
