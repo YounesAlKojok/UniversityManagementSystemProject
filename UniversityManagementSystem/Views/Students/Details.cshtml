@@ -55,7 +55,34 @@
         </dd>
     </dl>
 </div>
+
 <hr />
+<div>
+    <table class="table table-bordered border-primary text-center table-hover">
+        <thead>
+            <tr class="table-active">
+                <th>Course</th>
+                <th>Code</th>
+                <th>Credit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var enrol in Model.Enrollments)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model =>enrol.Course) </td>
+ @*                   <td>@Html.DisplayFor(model =>course.Code) </td>
+                    <td>@Html.DisplayFor(model =>course.Credit) </td>*@
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+
 <div>
     <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
     <a class="btn btn-dark" asp-action="Index">Back to List</a>

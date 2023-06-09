@@ -23,6 +23,8 @@ namespace UniversityManagementSystem.Models
 
         public virtual Student? Student { get; set; } = null!;
         public virtual Lecturer? Lecturer { get; set; }
+
+
     }
 
 }

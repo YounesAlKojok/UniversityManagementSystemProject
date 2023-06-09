@@ -44,6 +44,7 @@ else if (TempData["Edit"] != null)
             <th>
                 @Html.DisplayNameFor(model => model.Course)
             </th>
+            <th>day/time</th>
             <th>
                 @Html.DisplayNameFor(model => model.Grade)
             </th>
@@ -55,7 +56,7 @@ else if (TempData["Edit"] != null)
             </th>
             <th>
                 Lecturer Mail
-            </th>
+            </th>            
             <th>Action</th>
         </tr>
     </thead>
@@ -65,13 +66,14 @@ else if (TempData["Edit"] != null)
             @if (item.Course.Lecturer.Mail == User.Identity.Name)
             {
                 <tr>
-                    <td>
+                    <td class="p-1 m-0">
                         @Html.DisplayFor(modelItem => item.Student.FullName)
                     </td>
-                    <td>
+                    <td class="p-1 m-0">
                         @Html.DisplayFor(modelItem => item.Course.Name)
                     </td>
-                    <td>
+                    <td>@Html.DisplayFor(modelItem => item.Course.DayOfStudy) @Html.DisplayFor(modelItem => item.Course.TimeOfStudy)</td>
+                    <td class="p-1 m-0">
 
                         @if (item.Grade == 0)
                         {
@@ -87,16 +89,16 @@ else if (TempData["Edit"] != null)
                         }
                     </td>
 
-                    <td>
+                    <td class="p-1 m-0">
                         @Html.DisplayFor(modelItem => item.Year)
                     </td>
-                    <td>
+                    <td class="p-1 m-0">
                         @Html.DisplayFor(modelItem => item.Semester)
                     </td>
-                    <td>
+                    <td class="p-1 m-0">
                         <a href="mailto:@(item.Course.Lecturer.Mail)">@item.Course.Lecturer.FullName</a>
                     </td>
-                    <td>
+                    <td class="p-1 m-0">
                         <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
                         <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-info-circle"></i></a>
                     </td>
@@ -105,13 +107,14 @@ else if (TempData["Edit"] != null)
             else if (item.Student.Mail == User.Identity.Name)
             {
                 <tr>
-                    <td>
+                    <td class="p-1 m-0">
                         @Html.DisplayFor(modelItem => item.Student.FullName)
                     </td>
-                    <td>
+                    <td class="p-1 m-0">
                         @Html.DisplayFor(modelItem => item.Course.Name)
                     </td>
-                    <td>
+                    <td>@Html.DisplayFor(modelItem => item.Course.DayOfStudy) @Html.DisplayFor(modelItem => item.Course.TimeOfStudy)</td>
+                    <td class="p-1 m-0">
 
                         @if (item.Grade == 0)
                         {
@@ -127,16 +130,16 @@ else if (TempData["Edit"] != null)
                         }
                     </td>
 
-                    <td>
+                    <td class="p-1 m-0">
                         @Html.DisplayFor(modelItem => item.Year)
                     </td>
-                    <td>
+                    <td class="p-1 m-0">
                         @Html.DisplayFor(modelItem => item.Semester)
                     </td>
-                    <td>
+                    <td class="p-1 m-0">
                         <a href="mailto:@(item.Course.Lecturer.Mail)">@item.Course.Lecturer.FullName</a>
-                    </td>
-                    <td>
+                    </td>                   
+                    <td class="p-1 m-0">
                         <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                     </td>
                 </tr>
@@ -144,13 +147,14 @@ else if (TempData["Edit"] != null)
             else if (User.IsInRole("Administrator") || User.IsInRole("Dean"))
             {
                 <tr>
-                    <td>
+                    <td class="p-1 m-0">
                         @Html.DisplayFor(modelItem => item.Student.FullName)
                     </td>
-                    <td>
+                    <td class="p-1 m-0">
                         @Html.DisplayFor(modelItem => item.Course.Name)
                     </td>
-                    <td>
+                    <td>@Html.DisplayFor(modelItem => item.Course.DayOfStudy) @Html.DisplayFor(modelItem => item.Course.TimeOfStudy)</td>
+                    <td class="p-1 m-0">
 
                         @if (item.Grade == 0)
                         {
@@ -166,16 +170,16 @@ else if (TempData["Edit"] != null)
                         }
                     </td>
 
-                    <td>
+                    <td class="p-1 m-0">
                         @Html.DisplayFor(modelItem => item.Year)
                     </td>
-                    <td>
+                    <td class="p-1 m-0">
                         @Html.DisplayFor(modelItem => item.Semester)
                     </td>
-                    <td>
+                    <td class="p-1 m-0">
                         <a href="mailto:@(item.Course.Lecturer.Mail)">@item.Course.Lecturer.FullName</a>
-                    </td>
-                    <td>
+                    </td>                    
+                    <td class="p-1 m-0">
                         <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
                         <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-info-circle"></i></a>
                         <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash3"></i></a>
