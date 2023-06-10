@@ -61,21 +61,59 @@ namespace UniversityManagementSystem.Controllers
         // POST: Enrollments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,CourseId,EnrolDate,Semester,StudentId,Year,Grade")] Enrollment enrollment)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(enrollment);
+        //        await _context.SaveChangesAsync();
+        //        TempData["Success"] = "Enrollment record was created";
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Id", enrollment.CourseId);
+        //    ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", enrollment.StudentId);
+        //    return View(enrollment);
+        //}
+
+        // New
+        // POST: Enrollments/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CourseId,EnrolDate,Semester,StudentId,Year,Grade")] Enrollment enrollment)
         {
             if (ModelState.IsValid)
             {
+                // Check if a similar enrollment already exists
+                bool enrollmentExists = await _context.Enrollments.AnyAsync(e =>
+                    e.CourseId == enrollment.CourseId &&
+                    e.StudentId == enrollment.StudentId &&
+                    e.Year == enrollment.Year &&
+                    e.Semester == enrollment.Semester);
+
+                if (enrollmentExists)
+                {
+                    ModelState.AddModelError("", "An enrollment with the same course, student, year, and semester already exists.");
+                    ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Name", enrollment.CourseId);
+                    ViewData["StudentId"] = new SelectList(_context.Students, "Id", "FullName", enrollment.StudentId);
+                    return View(enrollment);
+                }
+
                 _context.Add(enrollment);
                 await _context.SaveChangesAsync();
                 TempData["Success"] = "Enrollment record was created";
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Id", enrollment.CourseId);
             ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", enrollment.StudentId);
             return View(enrollment);
         }
+
+        // End Of New
 
         // GET: Enrollments/Edit/5
         [Authorize(Roles = "Administrator, Lecturer, Dean")]
