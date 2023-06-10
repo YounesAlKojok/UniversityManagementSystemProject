@@ -63,7 +63,7 @@ namespace UniversityManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CourseId,EnrolDate,Semester,StudentId,Year")] Enrollment enrollment)
+        public async Task<IActionResult> Create([Bind("Id,CourseId,EnrolDate,Semester,StudentId,Year,Grade")] Enrollment enrollment)
         {
             if (ModelState.IsValid)
             {
