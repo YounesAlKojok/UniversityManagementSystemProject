@@ -102,6 +102,22 @@ namespace UniversityManagementSystem.Controllers
                     return View(enrollment);
                 }
 
+                // Check if a hasTimeConflict enrollment has conflic of time/day of study conflict exist
+                bool hasTimeConflict = await _context.Enrollments.AnyAsync(e =>
+                   e.StudentId == enrollment.StudentId &&
+                   e.Year == enrollment.Year &&
+                   e.Semester == enrollment.Semester &&
+                   _context.Courses.Any(c =>
+                       c.Id == enrollment.CourseId &&
+                       c.DayOfStudy == e.Course.DayOfStudy &&
+                       c.TimeOfStudy == e.Course.TimeOfStudy));
+                if (hasTimeConflict)
+                {
+                    ModelState.AddModelError("", "The course you are trying to enroll conflicts with the day and time of another course already enrolled by the same student.");
+                    ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Name", enrollment.CourseId);
+                    ViewData["StudentId"] = new SelectList(_context.Students, "Id", "FullName", enrollment.StudentId);
+                    return View(enrollment);
+                }
                 _context.Add(enrollment);
                 await _context.SaveChangesAsync();
                 TempData["Success"] = "Enrollment record was created";
@@ -146,8 +162,8 @@ namespace UniversityManagementSystem.Controllers
                 return NotFound();
             }
 
-            // Retrieve the logged-in lecturer's email
-            string lecturerEmail = User.Identity.Name;
+            // Retrieve the logged-in Authorized email
+            string authEmail = User.Identity.Name;
 
             // Find the enrollment and include the course's lecturer
             var enrollmentToUpdate = await _context.Enrollments
@@ -161,7 +177,7 @@ namespace UniversityManagementSystem.Controllers
             }
 
             // Check if the logged-in lecturer's email matches the course's lecturer email
-            if (enrollmentToUpdate.Course.Lecturer.Mail == lecturerEmail)
+            if (User.IsInRole("Administrator") || User.IsInRole("Dean") || enrollmentToUpdate.Course.Lecturer.Mail == authEmail)
             {
                 // Update the enrollment's grade
                 enrollmentToUpdate.Grade = enrollment.Grade;
@@ -184,6 +200,7 @@ namespace UniversityManagementSystem.Controllers
                             throw;
                         }
                     }
+
                     TempData["Edit"] = "Enrollment record was Modified";
                     return RedirectToAction(nameof(Index));
                 }
