@@ -18,7 +18,7 @@
                 <label asp-for="Date" class="control-label"></label>
                 <select asp-for="Date" class="form-control">
                     <option value="">Select a date and time</option>
-                    @for (var date = DateTime.Today.AddDays(-1); date <= DateTime.Today.AddYears(1); date = date.AddDays(1))
+                    @for (var date = DateTime.Today.AddDays(-2); date <= DateTime.Today.AddYears(1); date = date.AddDays(1))
                     {
                         if (date.DayOfWeek >= DayOfWeek.Monday && date.DayOfWeek <= DayOfWeek.Thursday)
                         {
