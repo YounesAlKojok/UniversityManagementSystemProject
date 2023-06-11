@@ -29,8 +29,6 @@ namespace UniversityManagementSystem.Data
 
         public virtual DbSet<Faculty> Faculties { get; set; }
 
-        public virtual DbSet<Grade> Grades { get; set; }
-
         public virtual DbSet<Lecturer> Lecturers { get; set; }
 
         public virtual DbSet<Student> Students { get; set; }
@@ -199,17 +197,7 @@ namespace UniversityManagementSystem.Data
                     .HasForeignKey(d => d.DeanId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
-
-            modelBuilder.Entity<Grade>(entity =>
-            {
-                entity.HasOne(d => d.Course).WithMany(p => p.Grades)
-                    .HasForeignKey(d => d.CourseId)
-                    .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasOne(d => d.Student).WithMany(p => p.Grades)
-                    .HasForeignKey(d => d.StudentId)
-                    .OnDelete(DeleteBehavior.Cascade);
-            });
+            
 
             modelBuilder.Entity<Lecturer>(entity =>
             {

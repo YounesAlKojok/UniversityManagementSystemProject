@@ -29,7 +29,6 @@ namespace UniversityManagementSystem.Models
         public virtual Lecturer? Lecturer { get; set; }
 
         public virtual ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
-        public virtual ICollection<Grade> Grades { get; set; } = new List<Grade>();
         public virtual ICollection<Department> Departments { get; set; } = new List<Department>();
         public virtual ICollection<DepartmentsCourses> DepartmentsCourses { get; set; } = new List<DepartmentsCourses>();
     }

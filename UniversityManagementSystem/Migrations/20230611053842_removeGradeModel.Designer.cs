@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniversityManagementSystem.Data;
 
@@ -10,9 +11,10 @@ using UniversityManagementSystem.Data;
 namespace UniversityManagementSystem.Migrations
 {
     [DbContext(typeof(UniversityManagementSysDbContext))]
-    partial class UniversityManagementSysDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230611053842_removeGradeModel")]
+    partial class removeGradeModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.16");

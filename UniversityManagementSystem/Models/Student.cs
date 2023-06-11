@@ -33,7 +33,6 @@ namespace UniversityManagementSystem.Models
 
         public virtual ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
 
-        public virtual ICollection<Grade> Grades { get; set; } = new List<Grade>();
 
 
         // addon methods and new var
@@ -54,26 +53,7 @@ namespace UniversityManagementSystem.Models
         private class CustomValidateDobAttribute : ValidateDobAttribute
         {
         }
-
-
-
-
-        // Method to calculate the average score for the student
-        public double CalculateAverageScore()
-        {
-            if (Grades.Count == 0)
-            {
-                return 0.0;
-            }
-
-            double totalScore = 0.0;
-            foreach (var grade in Grades)
-            {
-                totalScore += Convert.ToDouble(grade.Score);
-            }
-
-            return totalScore / Grades.Count;
-        }
+      
 
 
 
