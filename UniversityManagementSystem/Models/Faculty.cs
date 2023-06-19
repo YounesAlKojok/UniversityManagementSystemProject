@@ -22,15 +22,7 @@ namespace UniversityManagementSystem.Models
         public virtual ICollection<Lecturer> Lecturers { get; set; } = new List<Lecturer>();
 
 
-        //addon methods and new var
         
-        /*method uses LINQ's Select method to project each faculty's name from the Faculties collection and converts result
-            * into a List<string> using the ToList method.It returns a list of faculty names associated with the department.
-           */
-        //public List<string> GetDepartmentFacultyNames()
-        //{
-        //    return Departments.Select(department => department.Name).ToList();
-        //}
 
         public string GetDepartmentFacultyNames()
         {

@@ -38,6 +38,7 @@ namespace UniversityManagementSystem.Controllers
 
             var student = await _context.Students
                 .Include(s => s.Department)
+                .Include(s => s.Enrollments)                
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (student == null)
             {

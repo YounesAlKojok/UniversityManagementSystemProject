@@ -58,24 +58,31 @@
 
 <hr />
 <div>
+    <h4>Enrolled Courses</h4>
     <table class="table table-bordered border-primary text-center table-hover">
         <thead>
             <tr class="table-active">
                 <th>Course</th>
-                <th>Code</th>
-                <th>Credit</th>
             </tr>
         </thead>
         <tbody>
+            
             @foreach (var enrol in Model.Enrollments)
             {
                 <tr>
-                    <td>@Html.DisplayFor(model =>enrol.Course) </td>
- @*                   <td>@Html.DisplayFor(model =>course.Code) </td>
-                    <td>@Html.DisplayFor(model =>course.Credit) </td>*@
+                    <td>@enrol.CourseId</td>
+                </tr>
+            }
+
+
+@*            @foreach (var enrol in Model.GetCoursesTaken())
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model =>enrol.CourseId) </td>
+
                 </tr>
 
-            }
+            }*@
 
         </tbody>
     </table>

@@ -31,16 +31,7 @@ namespace UniversityManagementSystem.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Create(IdentityRole model)
-        //{
-        //    // avoid duplicate role
-        //    if (!_roleManager.RoleExistsAsync(model.Name).GetAwaiter().GetResult())
-        //    {
-        //        _roleManager.CreateAsync(new IdentityRole(model.Name)).GetAwaiter().GetResult();
-        //    }
-        //    return RedirectToAction("Index");
-        //}
+        
         [HttpPost]
         public async Task<IActionResult> Create(IdentityRole model)
         {

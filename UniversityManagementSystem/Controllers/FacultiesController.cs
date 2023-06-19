@@ -25,9 +25,6 @@ namespace UniversityManagementSystem.Controllers
         // GET: Faculties
         public async Task<IActionResult> Index()
         {
-            // 1 var universityManagementSysDbContext = _context.Faculties.Include(f => f.Dean).Include(f => f.Departments).ToListAsync(); ;
-            // 1 return View(await universityManagementSysDbContext.ToListAsync());
-            //2 return View(universityManagementSysDbContext);
             var faculties = await _context.Faculties
          .Include(f => f.Dean)
          .Include(f => f.Departments)

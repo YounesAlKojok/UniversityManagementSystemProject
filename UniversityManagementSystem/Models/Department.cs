@@ -25,8 +25,7 @@ namespace UniversityManagementSystem.Models
 
         //addon methods and new var
 
-        //public void AddCourse(Course course) { Courses.Add(course); }
-        //public void RemoveCourse(Course course) { Courses.Remove(course); }
+       
         public int GetCourseCount() { return DepartmentsCourses.Count; }
         public int GetStudentCount() { return Students.Count; }
     }

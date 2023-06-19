@@ -52,10 +52,16 @@ namespace UniversityManagementSystem.Controllers
         [Authorize(Roles = "Administrator,Dean,Student")]
         public IActionResult Create()
         {
-            // Old
-            //ViewData["DeanId"] = new SelectList(_context.Deans, "Id","FullName" ,"Mail");
-            //ViewData["StudentId"] = new SelectList(_context.Students, "Id", "FullName");
-            //return View();
+            // Get the email of the logged-in user
+            string userEmail = User.Identity.Name;
+
+            // Find the student based on the logged-in user's email
+            var student = _context.Students.FirstOrDefault(s => s.Mail == userEmail);
+            if (student == null)
+            {
+                // Handle the case when the logged-in user is not a student
+                return NotFound();
+            }
 
             // New
             DateTime now = DateTime.Now;
@@ -73,7 +79,7 @@ namespace UniversityManagementSystem.Controllers
             }
 
             ViewData["DeanId"] = new SelectList(_context.Deans, "Id", "FullName", "Mail");
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "FullName");
+            ViewData["StudentId"] = new SelectList(new List<Student> { student }, "Id", "FullName"); // Only include the logged-in student
             ViewData["AvailableSlots"] = availableSlots;
 
             return View();

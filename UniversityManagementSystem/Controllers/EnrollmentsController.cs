@@ -61,26 +61,7 @@ namespace UniversityManagementSystem.Controllers
         // POST: Enrollments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Id,CourseId,EnrolDate,Semester,StudentId,Year,Grade")] Enrollment enrollment)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(enrollment);
-        //        await _context.SaveChangesAsync();
-        //        TempData["Success"] = "Enrollment record was created";
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Id", enrollment.CourseId);
-        //    ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", enrollment.StudentId);
-        //    return View(enrollment);
-        //}
-
-        // New
-        // POST: Enrollments/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CourseId,EnrolDate,Semester,StudentId,Year,Grade")] Enrollment enrollment)
@@ -179,8 +160,23 @@ namespace UniversityManagementSystem.Controllers
             // Check if the logged-in lecturer's email matches the course's lecturer email
             if (User.IsInRole("Administrator") || User.IsInRole("Dean") || enrollmentToUpdate.Course.Lecturer.Mail == authEmail)
             {
-                // Update the enrollment's grade
-                enrollmentToUpdate.Grade = enrollment.Grade;
+                if (enrollmentToUpdate.Course.Lecturer.Mail == authEmail)
+                {
+                    // Update the enrollment's grade
+                    enrollmentToUpdate.Grade = enrollment.Grade;
+                }
+                else
+                {
+                    // Update the enrollment's grade
+                    enrollmentToUpdate.CourseId = enrollment.CourseId;
+                    enrollmentToUpdate.StudentId = enrollment.StudentId;
+                    enrollmentToUpdate.Semester = enrollment.Semester;
+                    enrollmentToUpdate.Year = enrollment.Year;
+                    enrollmentToUpdate.Grade = enrollment.Grade;
+
+
+                }
+
 
                 if (ModelState.IsValid)
                 {
