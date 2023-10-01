@@ -49,8 +49,9 @@ namespace UniversityManagementSystem.Models
             return null;
         }
 
-        //public bool HasDepartment() { return DepartmentId.HasValue; }
+        
         public bool HasCourses() { return Courses.Count > 0; }
+
         public int GetCoursCount() { return Courses.Count; }
 
 

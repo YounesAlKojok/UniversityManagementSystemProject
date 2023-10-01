@@ -74,16 +74,6 @@
                 </tr>
             }
 
-
-@*            @foreach (var enrol in Model.GetCoursesTaken())
-            {
-                <tr>
-                    <td>@Html.DisplayFor(model =>enrol.CourseId) </td>
-
-                </tr>
-
-            }*@
-
         </tbody>
     </table>
 </div>
@@ -94,3 +84,5 @@
     <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
     <a class="btn btn-dark" asp-action="Index">Back to List</a>
 </div>
+
+
