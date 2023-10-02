@@ -35,7 +35,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-
+//map requests to Razor Pages. 
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
